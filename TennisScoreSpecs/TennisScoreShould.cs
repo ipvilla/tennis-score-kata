@@ -1,27 +1,27 @@
 using NSubstitute;
 using NUnit.Framework;
 
-namespace TenisScoreSpecs
+namespace TennisScoreSpecs
 {
-    public class TenisScoreShould
+    public class TennisScoreShould
     {
         [Test]
         public void print_initial_score()
         {
             var printer = Substitute.For<IScorePrinter>();
-            var tenisGame = new TenisGame(printer);
+            var tennisGame = new TennisGame(printer);
 
-            tenisGame.PrintScore();
+            tennisGame.PrintScore();
 
             printer.Received().Print("Current score: love - love");
         }
     }
 
-    public class TenisGame
+    public class TennisGame
     {
         private readonly IScorePrinter printer;
 
-        public TenisGame(IScorePrinter printer)
+        public TennisGame(IScorePrinter printer)
         {
             this.printer = printer;
         }
