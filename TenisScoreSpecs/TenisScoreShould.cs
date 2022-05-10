@@ -19,12 +19,16 @@ namespace TenisScoreSpecs
 
     public class TenisGame
     {
+        private readonly IScorePrinter printer;
+
         public TenisGame(IScorePrinter printer)
         {
+            this.printer = printer;
         }
 
         public void PrintScore()
         {
+            printer.Print("Current score: love - love");
         }
     }
 
