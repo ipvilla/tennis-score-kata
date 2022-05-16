@@ -54,19 +54,20 @@ namespace TennisScoreSpecs
 
         public void PrintScore()
         {
-            if (playerOneScore == 1)
+            string convertedPlayerOneScore = GetScore(playerOneScore);
+            string convertedPlayerTwoScore = GetScore(playerTwoScore);
+
+            printer.Print($"Current score: {convertedPlayerOneScore} - {convertedPlayerTwoScore}");
+        }
+
+        private string GetScore(int score)
+        {
+            switch (score)
             {
-                printer.Print("Current score: 15 - love");
-            }
-            else
-            {
-                if (playerTwoScore == 1)
-                {
-                    printer.Print("Current score: love - 15");
-                }
-                else{
-                    printer.Print("Current score: love - love");
-                }
+                case 0:
+                    return "love";
+                default:
+                    return "15";
             }
         }
 
