@@ -45,6 +45,7 @@ namespace TennisScoreSpecs
     {
         private readonly IScorePrinter printer;
         private int playerOneScore;
+        private int playerTwoScore;
 
         public TennisGame(IScorePrinter printer)
         {
@@ -59,7 +60,13 @@ namespace TennisScoreSpecs
             }
             else
             {
-                printer.Print("Current score: love - love");
+                if (playerTwoScore == 1)
+                {
+                    printer.Print("Current score: love - 15");
+                }
+                else{
+                    printer.Print("Current score: love - love");
+                }
             }
         }
 
@@ -70,6 +77,7 @@ namespace TennisScoreSpecs
 
         public void PlayerTwoScores()
         {
+            playerTwoScore++;
         }
     }
 
