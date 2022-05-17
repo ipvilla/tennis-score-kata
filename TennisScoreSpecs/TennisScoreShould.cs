@@ -135,6 +135,11 @@ namespace TennisScoreSpecs
         }
         private string GetCombinedScore()
         {
+            if (playerOneScore > 3 && playerTwoScore >= 3 && playerOneScore == playerTwoScore + 1)
+            {
+                return $"advantage - {GetIndividualScore(playerTwoScore)}";
+            }
+
             return PlayersAreDeuce() ? "deuce" : $"{GetIndividualScore(playerOneScore)} - {GetIndividualScore(playerTwoScore)}";
         }
 
