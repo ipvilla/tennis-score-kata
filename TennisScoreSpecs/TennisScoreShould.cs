@@ -85,7 +85,7 @@ namespace TennisScoreSpecs
         }
 
         [Test]
-        public void say_that_player_has_advantage_if_player_scores_when_both_players_are_deuce()
+        public void say_that_player_one_has_advantage_if_player_one_scores_when_both_players_are_deuce()
         {
             var printer = Substitute.For<IScorePrinter>();
             var tennisGame = new TennisGame(printer);
