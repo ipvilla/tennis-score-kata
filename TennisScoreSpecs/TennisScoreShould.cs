@@ -98,20 +98,10 @@ namespace TennisScoreSpecs
 
         public void PrintScore()
         {
-            if (playerOneScore == playerTwoScore && playerOneScore >= 3)
-            {
-                printer.Print("Current score: deuce");
-            }
-            else
-            {
-                string convertedPlayerOneScore = GetScore(playerOneScore);
-                string convertedPlayerTwoScore = GetScore(playerTwoScore);
-
-                printer.Print($"Current score: {convertedPlayerOneScore} - {convertedPlayerTwoScore}");
-            }
+            printer.Print($"Current score: {GetCombinedScore()}");
         }
 
-        private string GetScore(int score)
+        private string GetIndividualScore(int score)
         {
             switch (score)
             {
@@ -124,6 +114,15 @@ namespace TennisScoreSpecs
                 default:
                     return "40";
             }
+        }
+        private string GetCombinedScore()
+        {
+            return PlayersAreDeuce() ? "deuce" : $"{GetIndividualScore(playerOneScore)} - {GetIndividualScore(playerTwoScore)}";
+        }
+
+        private bool PlayersAreDeuce()
+        {
+            return playerOneScore == playerTwoScore && playerOneScore >= 3;
         }
 
         public void PlayerOneScores()
