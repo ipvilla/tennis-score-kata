@@ -95,8 +95,10 @@ namespace TennisScoreSpecs
                     return "love";
                 case 1:
                     return "15";
-                default:
+                case 2:
                     return "30";
+                default:
+                    return "40";
             }
         }
 
