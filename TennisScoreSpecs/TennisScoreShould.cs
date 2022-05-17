@@ -98,10 +98,17 @@ namespace TennisScoreSpecs
 
         public void PrintScore()
         {
-            string convertedPlayerOneScore = GetScore(playerOneScore);
-            string convertedPlayerTwoScore = GetScore(playerTwoScore);
+            if (playerOneScore == playerTwoScore && playerOneScore >= 3)
+            {
+                printer.Print("Current score: deuce");
+            }
+            else
+            {
+                string convertedPlayerOneScore = GetScore(playerOneScore);
+                string convertedPlayerTwoScore = GetScore(playerTwoScore);
 
-            printer.Print($"Current score: {convertedPlayerOneScore} - {convertedPlayerTwoScore}");
+                printer.Print($"Current score: {convertedPlayerOneScore} - {convertedPlayerTwoScore}");
+            }
         }
 
         private string GetScore(int score)
