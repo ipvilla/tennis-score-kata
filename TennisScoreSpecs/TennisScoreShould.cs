@@ -39,6 +39,19 @@ namespace TennisScoreSpecs
 
             printer.Received().Print("Current score: love - 15");
         }
+
+        [Test]
+        public void increase_player_score_to_30_when_player_scores_two_points()
+        {
+            var printer = Substitute.For<IScorePrinter>();
+            var tennisGame = new TennisGame(printer);
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+
+            tennisGame.PrintScore();
+
+            printer.Received().Print("Current score: 30 - love");
+        }
     }
 
     public class TennisGame
