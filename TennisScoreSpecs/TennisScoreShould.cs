@@ -66,6 +66,23 @@ namespace TennisScoreSpecs
 
             printer.Received().Print("Current score: 40 - love");
         }
+
+        [Test]
+        public void say_that_players_are_deuce_if_they_both_score_three_points()
+        {
+            var printer = Substitute.For<IScorePrinter>();
+            var tennisGame = new TennisGame(printer);
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+
+            tennisGame.PrintScore();
+
+            printer.Received().Print("Current score: deuce");
+        }
     }
 
     public class TennisGame
