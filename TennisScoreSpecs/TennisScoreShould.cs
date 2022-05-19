@@ -101,6 +101,24 @@ namespace TennisScoreSpecs
 
             printer.Received().Print("Current score: advantage - 40");
         }
+
+        [Test]
+        public void say_that_player_two_has_advantage_if_player_two_scores_when_both_players_are_deuce()
+        {
+            var printer = Substitute.For<IScorePrinter>();
+            var tennisGame = new TennisGame(printer);
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+
+            tennisGame.PrintScore();
+
+            printer.Received().Print("Current score: 40 - advantage");
+        }
     }
 
     public class TennisGame
