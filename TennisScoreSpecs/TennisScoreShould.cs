@@ -247,6 +247,10 @@ namespace TennisScoreSpecs
             {
                 return "Player one wins!";
             }
+            if (playerOneScore >= 3 && playerTwoScore >= 3 && playerTwoScore == playerOneScore + 2)
+            {
+                return "Player two wins!";
+            }
             if (PlayerOneHasAdvantage())
             {
                 return $"advantage - {GetIndividualScore(playerTwoScore)}";
