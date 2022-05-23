@@ -1,3 +1,5 @@
+using System;
+using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -206,6 +208,20 @@ namespace TennisScoreSpecs
 
             printer.Received().Print("Current score: Player two wins!");
         }
+
+        [Test]
+        public void not_increase_player_one_score_after_player_one_has_won()
+        {
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            var currentScore = tennisGame.GetPlayerOneScore();
+
+            tennisGame.PlayerOneScores();
+            
+            tennisGame.GetPlayerOneScore().Should().Be(currentScore);
+        }
     }
 
     public class Player
@@ -256,7 +272,7 @@ namespace TennisScoreSpecs
     public class TennisGame
     {
         private readonly IScorePrinter printer;
-        private readonly Player playerOne;
+        public readonly Player playerOne;
         private readonly Player playerTwo;
 
         public TennisGame(IScorePrinter printer)
@@ -326,6 +342,10 @@ namespace TennisScoreSpecs
         public void PlayerTwoScores()
         {
             playerTwo.WinAPoint();
+        }
+        public int GetPlayerOneScore()
+        {
+            throw new NotImplementedException();
         }
     }
 
