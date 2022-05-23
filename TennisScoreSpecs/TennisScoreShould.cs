@@ -157,6 +157,23 @@ namespace TennisScoreSpecs
 
             printer.Received().Print("Current score: Player one wins!");
         }
+
+        [Test]
+        public void say_that_player_one_won_when_he_scored_four_points_and_two_more_than_player_two()
+        {
+            var printer = Substitute.For<IScorePrinter>();
+            var tennisGame = new TennisGame(printer);
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+
+            tennisGame.PrintScore();
+
+            printer.Received().Print("Current score: Player one wins!");
+        }
     }
 
     public class TennisGame
