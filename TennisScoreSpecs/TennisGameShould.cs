@@ -208,23 +208,16 @@ namespace TennisScoreSpecs
         }
     }
 
-    public class TennisGame
+    public class Player
     {
-        private readonly IScorePrinter printer;
-        private int playerOneScore;
-        private int playerTwoScore;
+        public int score { get; private set; }
 
-        public TennisGame(IScorePrinter printer)
+        public void WinAPoint()
         {
-            this.printer = printer;
+            score++;
         }
 
-        public void PrintScore()
-        {
-            printer.Print($"Current score: {GetCombinedScore()}");
-        }
-
-        private string GetIndividualScore(int score)
+        public string GetScore()
         {
             switch (score)
             {
@@ -238,6 +231,31 @@ namespace TennisScoreSpecs
                     return "40";
             }
         }
+
+        public bool HasMoreThanThreePoints()
+        {
+            return score > 3;
+        }
+    }
+
+    public class TennisGame
+    {
+        private readonly IScorePrinter printer;
+        private readonly Player playerOne;
+        private readonly Player playerTwo;
+
+        public TennisGame(IScorePrinter printer)
+        {
+            this.printer = printer;
+            playerOne = new Player();
+            playerTwo = new Player();
+        }
+
+        public void PrintScore()
+        {
+            printer.Print($"Current score: {GetCombinedScore()}");
+        }
+
         private string GetCombinedScore()
         {
             if (PlayerOneWon())
@@ -250,49 +268,49 @@ namespace TennisScoreSpecs
             }
             if (PlayerOneHasAdvantage())
             {
-                return $"advantage - {GetIndividualScore(playerTwoScore)}";
+                return $"advantage - {playerTwo.GetScore()}";
             }
             if (PlayerTwoHasAdvantage())
             {
-                return $"{GetIndividualScore(playerOneScore)} - advantage";
+                return $"{playerOne.GetScore()} - advantage";
             }
 
-            return PlayersAreDeuce() ? "deuce" : $"{GetIndividualScore(playerOneScore)} - {GetIndividualScore(playerTwoScore)}";
+            return PlayersAreDeuce() ? "deuce" : $"{playerOne.GetScore()} - {playerTwo.GetScore()}";
         }
 
         private bool PlayerTwoWon()
         {
-            return playerTwoScore > 3 && playerTwoScore >= playerOneScore + 2;
+            return playerTwo.HasMoreThanThreePoints() && playerTwo.score >= playerOne.score + 2;
         }
 
         private bool PlayerOneWon()
         {
-            return playerOneScore > 3 && playerOneScore >= playerTwoScore + 2;
+            return playerOne.HasMoreThanThreePoints() && playerOne.score >= playerTwo.score + 2;
         }
 
         private bool PlayerOneHasAdvantage()
         {
-            return playerOneScore > 3 && playerTwoScore >= 3 && playerOneScore == playerTwoScore + 1;
+            return playerOne.HasMoreThanThreePoints() && playerTwo.score >= 3 && playerOne.score == playerTwo.score + 1;
         }
 
         private bool PlayerTwoHasAdvantage()
         {
-            return playerTwoScore > 3 && playerOneScore >= 3 && playerTwoScore == playerOneScore + 1;
+            return playerTwo.HasMoreThanThreePoints() && playerOne.score >= 3 && playerTwo.score == playerOne.score + 1;
         }
-
+        
         private bool PlayersAreDeuce()
         {
-            return playerOneScore == playerTwoScore && playerOneScore >= 3;
+            return playerOne.score == playerTwo.score && playerOne.score >= 3;
         }
 
         public void PlayerOneScores()
         {
-            playerOneScore++;
+            playerOne.WinAPoint();
         }
 
         public void PlayerTwoScores()
         {
-            playerTwoScore++;
+            playerTwo.WinAPoint();
         }
     }
 
