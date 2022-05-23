@@ -209,6 +209,22 @@ namespace TennisScoreSpecs
 
             printer.Received().Print("Current score: Player two wins!");
         }
+
+        [Test]
+        public void say_that_player_two_won_when_he_scored_four_points_and_more_than_two_ahead_of_player_one()
+        {
+            var printer = Substitute.For<IScorePrinter>();
+            var tennisGame = new TennisGame(printer);
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+
+            tennisGame.PrintScore();
+
+            printer.Received().Print("Current score: Player two wins!");
+        }
     }
 
     public class TennisGame
