@@ -157,6 +157,10 @@ namespace TennisScoreSpecs
             {
                 return $"advantage - {GetIndividualScore(playerTwoScore)}";
             }
+            if (PlayerTwoHasAdvantage())
+            {
+                return $"{GetIndividualScore(playerOneScore)} - advantage";
+            }
 
             return PlayersAreDeuce() ? "deuce" : $"{GetIndividualScore(playerOneScore)} - {GetIndividualScore(playerTwoScore)}";
         }
@@ -164,6 +168,11 @@ namespace TennisScoreSpecs
         private bool PlayerOneHasAdvantage()
         {
             return playerOneScore > 3 && playerTwoScore >= 3 && playerOneScore == playerTwoScore + 1;
+        }
+
+        private bool PlayerTwoHasAdvantage()
+        {
+            return playerTwoScore > 3 && playerOneScore >= 3 && playerTwoScore == playerOneScore + 1;
         }
 
         private bool PlayersAreDeuce()
