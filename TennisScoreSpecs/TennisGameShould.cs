@@ -5,12 +5,19 @@ namespace TennisScoreSpecs
 {
     public class TennisGameShould
     {
+        private TennisGame tennisGame;
+        private IScorePrinter printer;
+
+        [SetUp]
+        public void SetUp()
+        {
+            printer = Substitute.For<IScorePrinter>();
+            tennisGame = new TennisGame(printer);
+        }
+
         [Test]
         public void print_initial_score()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
-
             tennisGame.PrintScore();
 
             printer.Received().Print("Current score: love - love");
@@ -19,8 +26,6 @@ namespace TennisScoreSpecs
         [Test]
         public void increase_player_1_score_to_15_when_player_1_scores_one_point()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
 
             tennisGame.PrintScore();
@@ -31,8 +36,6 @@ namespace TennisScoreSpecs
         [Test]
         public void increase_player_2_score_to_15_when_player_2_scores_one_point()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerTwoScores();
 
             tennisGame.PrintScore();
@@ -43,8 +46,6 @@ namespace TennisScoreSpecs
         [Test]
         public void increase_player_score_to_30_when_player_scores_two_points()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
 
@@ -56,8 +57,6 @@ namespace TennisScoreSpecs
         [Test]
         public void increase_player_score_to_40_when_player_scores_three_points()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
@@ -70,8 +69,6 @@ namespace TennisScoreSpecs
         [Test]
         public void say_that_players_are_deuce_if_they_both_score_three_points()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
@@ -87,8 +84,6 @@ namespace TennisScoreSpecs
         [Test]
         public void say_that_player_one_has_advantage_if_player_one_scores_when_both_players_are_deuce()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
@@ -105,8 +100,6 @@ namespace TennisScoreSpecs
         [Test]
         public void say_that_player_two_has_advantage_if_player_two_scores_when_both_players_are_deuce()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
@@ -123,8 +116,6 @@ namespace TennisScoreSpecs
         [Test]
         public void say_that_players_are_deuce_when_the_player_that_has_no_advantage_scores()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
@@ -142,8 +133,6 @@ namespace TennisScoreSpecs
         [Test]
         public void say_that_player_one_won_when_he_scored_when_having_advantage()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
@@ -161,8 +150,6 @@ namespace TennisScoreSpecs
         [Test]
         public void say_that_player_one_won_when_he_scored_four_points_and_two_more_than_player_two()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerTwoScores();
             tennisGame.PlayerTwoScores();
@@ -178,8 +165,6 @@ namespace TennisScoreSpecs
         [Test]
         public void say_that_player_one_won_when_he_scored_four_points_and_more_than_two_points_ahead_of_player_two()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerTwoScores();
             tennisGame.PlayerOneScores();
@@ -194,8 +179,6 @@ namespace TennisScoreSpecs
         [Test]
         public void say_that_player_two_won_when_he_scored_when_having_advantage()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
@@ -213,8 +196,6 @@ namespace TennisScoreSpecs
         [Test]
         public void say_that_player_two_won_when_he_scored_four_points_and_more_than_two_ahead_of_player_one()
         {
-            var printer = Substitute.For<IScorePrinter>();
-            var tennisGame = new TennisGame(printer);
             tennisGame.PlayerTwoScores();
             tennisGame.PlayerOneScores();
             tennisGame.PlayerTwoScores();
