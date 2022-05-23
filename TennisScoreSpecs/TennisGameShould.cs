@@ -236,6 +236,21 @@ namespace TennisScoreSpecs
         {
             return score > 3;
         }
+
+        public bool HasAtLeastThreePoints()
+        {
+            return score >= 3;
+        }
+
+        public bool HasAtLeastTwoPointsMoreThan(int referencePoints)
+        {
+            return score >= referencePoints + 2;
+        }
+
+        public bool HasOnePointMoreThan(int referencePoints)
+        {
+            return score == referencePoints + 1;
+        }
     }
 
     public class TennisGame
@@ -280,27 +295,27 @@ namespace TennisScoreSpecs
 
         private bool PlayerTwoWon()
         {
-            return playerTwo.HasMoreThanThreePoints() && playerTwo.score >= playerOne.score + 2;
+            return playerTwo.HasMoreThanThreePoints() && playerTwo.HasAtLeastTwoPointsMoreThan(playerOne.score);
         }
 
         private bool PlayerOneWon()
         {
-            return playerOne.HasMoreThanThreePoints() && playerOne.score >= playerTwo.score + 2;
+            return playerOne.HasMoreThanThreePoints() && playerOne.HasAtLeastTwoPointsMoreThan(playerTwo.score);
         }
 
         private bool PlayerOneHasAdvantage()
         {
-            return playerOne.HasMoreThanThreePoints() && playerTwo.score >= 3 && playerOne.score == playerTwo.score + 1;
+            return playerOne.HasMoreThanThreePoints() && playerTwo.HasAtLeastThreePoints() && playerOne.HasOnePointMoreThan(playerTwo.score);
         }
 
         private bool PlayerTwoHasAdvantage()
         {
-            return playerTwo.HasMoreThanThreePoints() && playerOne.score >= 3 && playerTwo.score == playerOne.score + 1;
+            return playerTwo.HasMoreThanThreePoints() && playerOne.HasAtLeastThreePoints() && playerTwo.HasOnePointMoreThan(playerOne.score);
         }
         
         private bool PlayersAreDeuce()
         {
-            return playerOne.score == playerTwo.score && playerOne.score >= 3;
+            return playerOne.score == playerTwo.score && playerOne.HasAtLeastThreePoints();
         }
 
         public void PlayerOneScores()
