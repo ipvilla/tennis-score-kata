@@ -190,6 +190,25 @@ namespace TennisScoreSpecs
 
             printer.Received().Print("Current score: Player one wins!");
         }
+
+        [Test]
+        public void say_that_player_two_won_when_he_scored_when_having_advantage()
+        {
+            var printer = Substitute.For<IScorePrinter>();
+            var tennisGame = new TennisGame(printer);
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+
+            tennisGame.PrintScore();
+
+            printer.Received().Print("Current score: Player two wins!");
+        }
     }
 
     public class TennisGame
