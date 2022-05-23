@@ -263,7 +263,7 @@ namespace TennisScoreSpecs
             {
                 return "Player one wins!";
             }
-            if (playerTwoScore > 3 && playerTwoScore >= playerOneScore + 2)
+            if (PlayerTwoWon())
             {
                 return "Player two wins!";
             }
@@ -277,6 +277,11 @@ namespace TennisScoreSpecs
             }
 
             return PlayersAreDeuce() ? "deuce" : $"{GetIndividualScore(playerOneScore)} - {GetIndividualScore(playerTwoScore)}";
+        }
+
+        private bool PlayerTwoWon()
+        {
+            return playerTwoScore > 3 && playerTwoScore >= playerOneScore + 2;
         }
 
         private bool PlayerOneWon()
