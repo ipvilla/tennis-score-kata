@@ -224,7 +224,7 @@ namespace TennisScoreSpecs
         }
         private string GetCombinedScore()
         {
-            if (playerOneScore > 3 && playerOneScore == playerTwoScore + 2)
+            if (playerOneScore > 3 && playerOneScore >= playerTwoScore + 2)
             {
                 return "Player one wins!";
             }
