@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace TennisScoreSpecs
 {
-    public class TennisScoreShould
+    public class TennisGameShould
     {
         [Test]
         public void print_initial_score()
