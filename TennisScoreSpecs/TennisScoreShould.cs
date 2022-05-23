@@ -224,7 +224,7 @@ namespace TennisScoreSpecs
         }
         private string GetCombinedScore()
         {
-            if (playerOneScore > 3 && playerOneScore >= playerTwoScore + 2)
+            if (PlayerOneWon())
             {
                 return "Player one wins!";
             }
@@ -238,6 +238,11 @@ namespace TennisScoreSpecs
             }
 
             return PlayersAreDeuce() ? "deuce" : $"{GetIndividualScore(playerOneScore)} - {GetIndividualScore(playerTwoScore)}";
+        }
+
+        private bool PlayerOneWon()
+        {
+            return playerOneScore > 3 && playerOneScore >= playerTwoScore + 2;
         }
 
         private bool PlayerOneHasAdvantage()
