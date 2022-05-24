@@ -227,6 +227,7 @@ namespace TennisScoreSpecs
     public class Player
     {
         public int score { get; private set; }
+        public bool IsWinner { get; internal set; }
 
         public void WinAPoint()
         {
@@ -336,16 +337,25 @@ namespace TennisScoreSpecs
 
         public void PlayerOneScores()
         {
-            playerOne.WinAPoint();
+            if (!playerOne.IsWinner)
+            {
+                playerOne.WinAPoint();
+                if (PlayerOneWon())
+                {
+                    playerOne.IsWinner = true;
+                }
+            }
+
         }
 
         public void PlayerTwoScores()
         {
             playerTwo.WinAPoint();
         }
+
         public int GetPlayerOneScore()
         {
-            throw new NotImplementedException();
+            return playerOne.score;
         }
     }
 
