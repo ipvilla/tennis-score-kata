@@ -288,6 +288,29 @@ namespace TennisScoreSpecs
             printer.Print($"Current score: {GetCombinedScore()}");
         }
 
+        public void PlayerOneScores()
+        {
+            if (!playerOne.IsWinner)
+            {
+                playerOne.WinAPoint();
+                if (PlayerOneWon())
+                {
+                    playerOne.IsWinner = true;
+                }
+            }
+
+        }
+
+        public void PlayerTwoScores()
+        {
+            playerTwo.WinAPoint();
+        }
+
+        public int GetPlayerOneScore()
+        {
+            return playerOne.Score;
+        }
+
         private string GetCombinedScore()
         {
             if (PlayerOneWon())
@@ -333,29 +356,6 @@ namespace TennisScoreSpecs
         private bool PlayersAreDeuce()
         {
             return playerOne.Score == playerTwo.Score && playerOne.HasAtLeastThreePoints();
-        }
-
-        public void PlayerOneScores()
-        {
-            if (!playerOne.IsWinner)
-            {
-                playerOne.WinAPoint();
-                if (PlayerOneWon())
-                {
-                    playerOne.IsWinner = true;
-                }
-            }
-
-        }
-
-        public void PlayerTwoScores()
-        {
-            playerTwo.WinAPoint();
-        }
-
-        public int GetPlayerOneScore()
-        {
-            return playerOne.Score;
         }
     }
 
