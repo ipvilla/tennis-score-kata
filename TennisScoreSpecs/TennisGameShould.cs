@@ -226,17 +226,17 @@ namespace TennisScoreSpecs
 
     public class Player
     {
-        public int score { get; private set; }
+        public int Score { get; private set; }
         public bool IsWinner { get; internal set; }
 
         public void WinAPoint()
         {
-            score++;
+            Score++;
         }
 
         public string GetScore()
         {
-            switch (score)
+            switch (Score)
             {
                 case 0:
                     return "love";
@@ -251,22 +251,22 @@ namespace TennisScoreSpecs
 
         public bool HasMoreThanThreePoints()
         {
-            return score > 3;
+            return Score > 3;
         }
 
         public bool HasAtLeastThreePoints()
         {
-            return score >= 3;
+            return Score >= 3;
         }
 
         public bool HasAtLeastTwoPointsMoreThan(int referencePoints)
         {
-            return score >= referencePoints + 2;
+            return Score >= referencePoints + 2;
         }
 
         public bool HasOnePointMoreThan(int referencePoints)
         {
-            return score == referencePoints + 1;
+            return Score == referencePoints + 1;
         }
     }
 
@@ -312,27 +312,27 @@ namespace TennisScoreSpecs
 
         private bool PlayerTwoWon()
         {
-            return playerTwo.HasMoreThanThreePoints() && playerTwo.HasAtLeastTwoPointsMoreThan(playerOne.score);
+            return playerTwo.HasMoreThanThreePoints() && playerTwo.HasAtLeastTwoPointsMoreThan(playerOne.Score);
         }
 
         private bool PlayerOneWon()
         {
-            return playerOne.HasMoreThanThreePoints() && playerOne.HasAtLeastTwoPointsMoreThan(playerTwo.score);
+            return playerOne.HasMoreThanThreePoints() && playerOne.HasAtLeastTwoPointsMoreThan(playerTwo.Score);
         }
 
         private bool PlayerOneHasAdvantage()
         {
-            return playerOne.HasMoreThanThreePoints() && playerTwo.HasAtLeastThreePoints() && playerOne.HasOnePointMoreThan(playerTwo.score);
+            return playerOne.HasMoreThanThreePoints() && playerTwo.HasAtLeastThreePoints() && playerOne.HasOnePointMoreThan(playerTwo.Score);
         }
 
         private bool PlayerTwoHasAdvantage()
         {
-            return playerTwo.HasMoreThanThreePoints() && playerOne.HasAtLeastThreePoints() && playerTwo.HasOnePointMoreThan(playerOne.score);
+            return playerTwo.HasMoreThanThreePoints() && playerOne.HasAtLeastThreePoints() && playerTwo.HasOnePointMoreThan(playerOne.Score);
         }
         
         private bool PlayersAreDeuce()
         {
-            return playerOne.score == playerTwo.score && playerOne.HasAtLeastThreePoints();
+            return playerOne.Score == playerTwo.Score && playerOne.HasAtLeastThreePoints();
         }
 
         public void PlayerOneScores()
@@ -355,7 +355,7 @@ namespace TennisScoreSpecs
 
         public int GetPlayerOneScore()
         {
-            return playerOne.score;
+            return playerOne.Score;
         }
     }
 
