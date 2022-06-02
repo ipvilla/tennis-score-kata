@@ -253,10 +253,10 @@ namespace TennisScoreSpecs
         [Test]
         public void not_increase_player_two_score_after_player_two_has_won()
         {
-            tennisGame.GetPlayerTwoScore();
-            tennisGame.GetPlayerTwoScore();
-            tennisGame.GetPlayerTwoScore();
-            tennisGame.GetPlayerTwoScore();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
+            tennisGame.PlayerTwoScores();
             var currentScore = tennisGame.GetPlayerTwoScore();
 
             tennisGame.PlayerTwoScores();
