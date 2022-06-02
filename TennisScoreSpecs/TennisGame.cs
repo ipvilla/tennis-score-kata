@@ -20,13 +20,12 @@ namespace TennisScoreSpecs
 
         public void PlayerOneScores()
         {
-            if (!playerOne.IsWinner)
+            if (playerOne.IsWinner) return;
+
+            playerOne.WinAPoint();
+            if (PlayerOneWon())
             {
-                playerOne.WinAPoint();
-                if (PlayerOneWon())
-                {
-                    playerOne.IsWinner = true;
-                }
+                playerOne.IsWinner = true;
             }
 
         }
@@ -43,24 +42,13 @@ namespace TennisScoreSpecs
 
         private string GetCombinedScore()
         {
-            if (PlayerOneWon())
-            {
-                return "Player one wins!";
-            }
-            if (PlayerTwoWon())
-            {
-                return "Player two wins!";
-            }
-            if (PlayerOneHasAdvantage())
-            {
-                return $"advantage - {playerTwo.GetScore()}";
-            }
-            if (PlayerTwoHasAdvantage())
-            {
-                return $"{playerOne.GetScore()} - advantage";
-            }
+            if (PlayerOneWon()) return "Player one wins!";
+            if (PlayerTwoWon()) return "Player two wins!";
+            if (PlayerOneHasAdvantage()) return $"advantage - {playerTwo.GetScore()}";
+            if (PlayerTwoHasAdvantage()) return $"{playerOne.GetScore()} - advantage";
+            if (PlayersAreDeuce()) return "deuce";
 
-            return PlayersAreDeuce() ? "deuce" : $"{playerOne.GetScore()} - {playerTwo.GetScore()}";
+            return $"{playerOne.GetScore()} - {playerTwo.GetScore()}";
         }
 
         private bool PlayerTwoWon()
