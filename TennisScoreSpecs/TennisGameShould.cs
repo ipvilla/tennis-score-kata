@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
@@ -244,6 +243,20 @@ namespace TennisScoreSpecs
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
             tennisGame.PlayerOneScores();
+            var currentScore = tennisGame.GetPlayerTwoScore();
+
+            tennisGame.PlayerTwoScores();
+
+            tennisGame.GetPlayerTwoScore().Should().Be(currentScore);
+        }
+
+        [Test]
+        public void not_increase_player_two_score_after_player_two_has_won()
+        {
+            tennisGame.GetPlayerTwoScore();
+            tennisGame.GetPlayerTwoScore();
+            tennisGame.GetPlayerTwoScore();
+            tennisGame.GetPlayerTwoScore();
             var currentScore = tennisGame.GetPlayerTwoScore();
 
             tennisGame.PlayerTwoScores();
