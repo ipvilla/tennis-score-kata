@@ -20,7 +20,7 @@ namespace TennisScoreSpecs
 
         public void PlayerOneScores()
         {
-            if (playerOne.IsWinner) return;
+            if (playerOne.IsWinner || playerTwo.IsWinner) return;
 
             playerOne.WinAPoint();
             if (PlayerOneWon())
@@ -33,6 +33,10 @@ namespace TennisScoreSpecs
         public void PlayerTwoScores()
         {
             playerTwo.WinAPoint();
+            if (PlayerTwoWon())
+            {
+                playerTwo.IsWinner = true;
+            }
         }
 
         public int GetPlayerOneScore()
