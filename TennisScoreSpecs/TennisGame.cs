@@ -32,7 +32,7 @@ namespace TennisScoreSpecs
 
         public void PlayerTwoScores()
         {
-            if (playerOne.IsWinner) return;
+            if (playerOne.IsWinner || playerTwo.IsWinner) return;
 
             playerTwo.WinAPoint();
             if (PlayerTwoWon())
