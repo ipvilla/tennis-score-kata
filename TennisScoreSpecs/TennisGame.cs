@@ -1,3 +1,5 @@
+using System;
+
 namespace TennisScoreSpecs
 {
     public class TennisGame
@@ -42,6 +44,11 @@ namespace TennisScoreSpecs
         public int GetPlayerOneScore()
         {
             return playerOne.Score;
+        }
+
+        public int GetPlayerTwoScore()
+        {
+            return -1;
         }
 
         private string GetCombinedScore()

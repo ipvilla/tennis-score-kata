@@ -236,5 +236,19 @@ namespace TennisScoreSpecs
             
             tennisGame.GetPlayerOneScore().Should().Be(currentScore);
         }
+
+        [Test]
+        public void not_increase_player_two_score_after_player_one_has_won()
+        {
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            tennisGame.PlayerOneScores();
+            var currentScore = tennisGame.GetPlayerTwoScore();
+
+            tennisGame.PlayerTwoScores();
+
+            tennisGame.GetPlayerTwoScore().Should().Be(currentScore);
+        }
     }
 }
