@@ -1,5 +1,3 @@
-using System;
-
 namespace TennisScoreSpecs
 {
     public class TennisGame
@@ -34,6 +32,8 @@ namespace TennisScoreSpecs
 
         public void PlayerTwoScores()
         {
+            if (playerOne.IsWinner) return;
+
             playerTwo.WinAPoint();
             if (PlayerTwoWon())
             {
@@ -48,7 +48,7 @@ namespace TennisScoreSpecs
 
         public int GetPlayerTwoScore()
         {
-            return -1;
+            return playerTwo.Score;
         }
 
         private string GetCombinedScore()
